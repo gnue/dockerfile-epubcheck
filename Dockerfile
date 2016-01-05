@@ -1,8 +1,7 @@
-FROM debian
+FROM alpine:3.3
 
-RUN apt-get update \
- && apt-get install -y curl unzip openjdk-7-jdk \
- && apt-get clean
+RUN apk add --update bash curl unzip openjdk7 && \
+    rm /var/cache/apk/*
 
 # epubcheck
 ENV EPUBCHECK epubcheck-4.0.1
