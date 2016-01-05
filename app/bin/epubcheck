@@ -1,4 +1,16 @@
-#!/bin/sh
+#!/bin/bash
 
 EPUBCHECK=${EPUBCHECK:-epubcheck-4.0.1}
-java -jar "/app/$EPUBCHECK/epubcheck.jar" "$@"
+
+epubcheck() {
+    echo "==> $@"
+    java -jar "/app/$EPUBCHECK/epubcheck.jar" "$@"
+}
+
+if [ -n "$*" ]; then
+    epubcheck "$@"
+else
+    for file in data/*.epub; do
+       epubcheck "$file"
+    done
+fi
