@@ -1,10 +1,8 @@
 #!/bin/bash
 
-EPUBCHECK=${EPUBCHECK:-epubcheck-4.0.1}
-
 epubcheck() {
     echo "==> $@"
-    java -jar "/app/$EPUBCHECK/epubcheck.jar" "$@"
+    java -jar "/app/epubcheck/epubcheck.jar" "$@"
 }
 
 if [ -n "$*" ]; then
