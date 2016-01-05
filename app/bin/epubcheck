@@ -1,0 +1,4 @@
+#!/bin/sh
+
+EPUBCHECK=${EPUBCHECK:-epubcheck-4.0.1}
+java -jar "/app/$EPUBCHECK/epubcheck.jar" "$@"
