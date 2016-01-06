@@ -1,0 +1,38 @@
+#!/bin/bash
+
+_epubcheck() {
+    java -jar "/app/epubcheck/epubcheck.jar" "$@"
+}
+
+epubcheck() {
+    local file="$1"
+    local fname=$(basename ${file%.*})
+    local FLAGS=$(eval echo "$EPUBCHECK_FLAGS")
+
+    echo "==> $FLAGS $file"
+    _epubcheck $FLAGS "$file"
+    echo
+}
+
+usage() {
+    _epubcheck -h
+    exit
+}
+
+ARGS=()
+OPTS=()
+
+for e in "$@"; do
+    case "$e" in
+       -h )     usage ;;
+       *.epub ) ARGS+=("$e") ;;
+       * )      OPTS+=("$e") ;;
+    esac
+done
+
+[ -z "$ARGS" ] && ARGS=data/*.epub
+EPUBCHECK_FLAGS+=" ${OPTS[@]}"
+
+for f in $ARGS; do
+    epubcheck "$f"
+done
