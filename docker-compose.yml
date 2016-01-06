@@ -1,0 +1,7 @@
+epubcheck:
+  environment:
+    EPUBCHECK_FLAGS: "--json log/$$fname.json"
+  image: gnue/epubcheck
+  volumes:
+    - "./data:/app/data:ro"
+    - "./log:/app/log"
